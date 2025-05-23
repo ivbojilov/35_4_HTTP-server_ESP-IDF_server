@@ -2,7 +2,7 @@ ESP-IDF template app
 ====================
 
 54cb76b - the client sends "Hello"; the server prints it; works  
-  
+&nbsp;  
   
   
 
