@@ -3,13 +3,13 @@ ESP-IDF template app
 
 54cb76b - the client sends "Hello"; the server prints it; works  
 &nbsp;  
-  
-  
-
-
-
-
-
+&nbsp;  
+&nbsp;  
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
 
   
 This is a template application to be used with [Espressif IoT Development Framework](https://github.com/espressif/esp-idf).
