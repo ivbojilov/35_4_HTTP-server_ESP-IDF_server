@@ -2,7 +2,7 @@ ESP-IDF template app
 ====================
 
 54cb76b - the client sends "Hello"; the server prints it; works  
-869cb44 - sending the int '10'; the client sends it as a string, the server parses the string to int  
+869cb44 - sending the int '10'; the client sends it as a string, the server parses the string to int; corresponds to clientside 67533f4  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
