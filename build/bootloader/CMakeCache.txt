@@ -254,7 +254,7 @@ IGNORE_EXTRA_COMPONENT:UNINITIALIZED=
 PROJECT_SOURCE_DIR:UNINITIALIZED=/home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server
 
 //No help, variable specified on the command line.
-PYTHON:UNINITIALIZED=python
+PYTHON:UNINITIALIZED=/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python
 
 //No help, variable specified on the command line.
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1

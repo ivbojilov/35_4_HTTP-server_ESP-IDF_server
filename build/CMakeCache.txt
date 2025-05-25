@@ -307,6 +307,9 @@ ENABLE_PROGRAMS:BOOL=
 //Build Mbed TLS tests.
 ENABLE_TESTING:BOOL=
 
+//No help, variable specified on the command line.
+ESP_PLATFORM:UNINITIALIZED=1
+
 //Generate the auto-generated files as needed
 GEN_FILES:BOOL=
 
@@ -345,6 +348,15 @@ Mbed TLS_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 Mbed TLS_SOURCE_DIR:STATIC=/home/ibojilov/Documents/esp-idf-v5.4.1/components/mbedtls/mbedtls
+
+//No help, variable specified on the command line.
+PYTHON:UNINITIALIZED=/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python
+
+//No help, variable specified on the command line.
+PYTHON_DEPS_CHECKED:UNINITIALIZED=1
+
+//No help, variable specified on the command line.
+SDKCONFIG:UNINITIALIZED=sdkconfig
 
 //Allow unsafe builds. These builds ARE NOT SECURE.
 UNSAFE_BUILD:BOOL=OFF
@@ -584,7 +596,7 @@ C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS:INTERNAL=1
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/bin/git][v2.34.1()]
 //Details about finding Python3
-FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python3.10][cfound components: Interpreter ][v3.10.12()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python][cfound components: Interpreter ][v3.10.12()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
@@ -595,11 +607,10 @@ _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 _Python3_Compiler_REASON_FAILURE:INTERNAL=
 //Development reason failure
 _Python3_Development_REASON_FAILURE:INTERNAL=
-//Path to a program.
-_Python3_EXECUTABLE:INTERNAL=/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python3.10
+_Python3_EXECUTABLE:INTERNAL=/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;12;32;64;;;abi3;/usr/lib/python3.10;/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/lib/python3.10;/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/lib/python3.10/site-packages;/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/lib/python3.10/site-packages
-_Python3_INTERPRETER_SIGNATURE:INTERNAL=e17ac5edc95912ed053fa5ab33257076
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=f11c20631ec3ec8552b60aa4fe9b3c95
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
 

@@ -9,3 +9,10 @@ tcp resending number
 check all parameters of all structures;
 wifi_default_config
 http_default_config
+
+keepalive
+
+cpu speed 240 MHz
+
+
+change POST content type to text/plain
