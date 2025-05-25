@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "app-template",
-    "project_version":    "1",
+    "project_version":    "9eb9378-dirty",
     "project_path":       "/home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server",
     "idf_path":           "/home/ibojilov/Documents/esp-idf-v5.4.1",
     "build_dir":          "/home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build",
@@ -1196,7 +1196,7 @@
             "managed_priv_reqs": [],
             "file": "/home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build/esp-idf/main/libmain.a",
             "sources": [ "/home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/main/main.c" ],
-            "include_dirs": []
+            "include_dirs": [ "." ]
         },
         "mbedtls": {
             "alias": "idf::mbedtls",
@@ -2845,7 +2845,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "include_dirs": []
+            "include_dirs": [ "." ]
         }
     },
     "debug_prefix_map_gdbinit": "",

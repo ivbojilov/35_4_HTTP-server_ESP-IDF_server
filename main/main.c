@@ -13,10 +13,11 @@
 #define MAX_STA_CONN 1
 
 #ifndef MIN
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
+	#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
-static const char *TAG = "WiFi_AP_Server";
+static const char* TAG = "WiFi_AP_Server";
+int16_t value = 0;
 
 // HTTP POST handler
 esp_err_t post_handler(httpd_req_t *req) {
@@ -25,7 +26,9 @@ esp_err_t post_handler(httpd_req_t *req) {
     if (ret <= 0) return ESP_FAIL;
 
     content[ret] = '\0'; // Null-terminate
-    ESP_LOGI(TAG, "Received POST data: %s", content);
+	value = atoi(content);
+    //ESP_LOGI(TAG, "Received POST data: %s", content);
+	ESP_LOGI(TAG, "Received POST data: %d", value);
 
     httpd_resp_send(req, "OK", HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
@@ -52,7 +55,8 @@ httpd_handle_t start_webserver(void) {
 }
 
 // Initialize AP mode
-void wifi_init_softap(void) {
+void wifi_init_softap(void) 
+{
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     esp_netif_create_default_wifi_ap();

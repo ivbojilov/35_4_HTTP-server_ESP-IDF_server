@@ -1,0 +1,11 @@
+ways to make it faster:
+pin task to a core explicitly; letting the ESP32 decide is not ideal for real-time
+wi-fi buffer
+tcp buffer
+
+enable https - disable
+tcp resending number
+
+check all parameters of all structures;
+wifi_default_config
+http_default_config
