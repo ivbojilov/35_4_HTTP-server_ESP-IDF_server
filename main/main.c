@@ -38,6 +38,7 @@ static int16_t bufferB[INT_ARR_LEN] = {0};
 static int16_t silence[INT_ARR_LEN] = {0};
 int16_t* activeBuffer = NULL;
 int16_t* currentBuffer = NULL;
+char* dequeued = NULL;
 
 volatile int8_t bufferReady = 0;
 volatile int8_t usingBufferA = 1;
@@ -47,18 +48,52 @@ int j = 0;
 char* i2s_saveptr;
 char* i2s_token;
 
+// Queue stuff
+char queue[MAX_SIZE][COLS] = {0};
+char data[COLS] = {0};
+int8_t front = -1;
+int8_t rear = -1;
 
-const uint16_t Volume = 1023;
-const int16_t Peak = Volume;
-const int16_t Trough = -Volume;
-int16_t OutputValue = Peak;
-const uint16_t WaveLength = 20;
-uint16_t TimeAtPeakOrTrough = WaveLength;
+int8_t _index = 0;
+int8_t first = 1;
+
+int isFull()
+{
+	return (rear + 1) % MAX_SIZE == front;
+}
+
+int isEmpty()
+{
+	return front == -1;
+}
+
+char* dequeue()
+{
+	if(isEmpty())
+	{
+		printf("Queue underflow\n");
+		return NULL;
+	}
+	
+	memcpy(data, queue[front], strlen(queue[front]));
+	
+	if(front == rear)
+	{
+		front = rear = -1;
+	} else
+	{
+		front = (front + 1) % MAX_SIZE;
+	}
+	
+	return data;
+}
+
+
+
+
+
 
 size_t BytesWritten;
-int16_t Value16Bit;
-
-
 
 static const i2s_port_t i2s_num = I2S_NUM_0;
 
@@ -115,8 +150,22 @@ void Task1code(void* parameter)
 {
 	while (1) {
 		
-			
-		strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN-1);
+		/*
+		if(first)
+		{
+			vTaskDelay(pdMS_TO_TICKS(5000));
+		}
+		*/
+		dequeued = dequeue();
+		if(dequeued == NULL)
+		{
+			i2s_write(i2s_num, silence, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
+			vTaskDelay(pdMS_TO_TICKS(90));
+			continue;
+		}
+		
+		strncpy(i2s_localCopy, dequeued, CHAR_ARR_LEN-1);	
+		//strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN-1);
 
 
 
@@ -179,12 +228,35 @@ esp_err_t post_handler(httpd_req_t *req) {
     
 	int total_received = 0;
 	int remaining = req->content_len;
+	_index = 0;
 	
 	//ESP_LOGI(TAG, "Size = %d", remaining);
 	
 	while(remaining > 0)
 	{
-    	int received = httpd_req_recv(req, content + total_received, remaining);
+		if(_index == 0)
+		{
+			_index = 1;
+			
+			if(isFull())
+			{
+				printf("Queue overflow\n");
+				return ESP_FAIL;
+			}
+			
+			if(front == -1)
+			{
+				front = 0;
+			}
+			
+			rear = (rear + 1) % MAX_SIZE;
+			
+			//memset(queue[rear], 0, COLS);
+			
+		}
+		
+		int received = httpd_req_recv(req, queue[rear] + total_received, remaining);		
+    	//int received = httpd_req_recv(req, content + total_received, remaining);
 	    if (received <= 0) return ESP_FAIL;
 		
 		total_received += received;
@@ -238,7 +310,7 @@ esp_err_t post_handler(httpd_req_t *req) {
 	*/
 	
 	
-
+	if(first) first = 0;
 	
     httpd_resp_send(req, "OK", HTTPD_RESP_USE_STRLEN);
 	//ESP_LOGI(TAG, "Response sent: %lld", esp_timer_get_time()/1000);
