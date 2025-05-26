@@ -22,12 +22,15 @@
 	#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
+#define CHAR_ARR_LEN 3600
+#define INT_ARR_LEN 800
 
 
-char i2s_string[1800] = {0};
-char i2s_localCopy[1800] = {0};
-int16_t i2s_numbers_setup[400] = {0};
-int16_t i2s_numbers[400] = {0};
+
+char i2s_string[CHAR_ARR_LEN] = {0};
+char i2s_localCopy[CHAR_ARR_LEN] = {0};
+int16_t i2s_numbers_setup[INT_ARR_LEN] = {0};
+int16_t i2s_numbers[INT_ARR_LEN] = {0};
 int j = 0;
 
 char* i2s_saveptr;
@@ -85,11 +88,11 @@ static const char* TAG = "WiFi_AP_Server";
 
 TaskHandle_t Task1;
 
-char content[1800];
-char localCopy[1800];
+char content[CHAR_ARR_LEN];
+char localCopy[CHAR_ARR_LEN];
 
 int16_t value = 0;
-int8_t numbers[400] = {0};
+int8_t numbers[INT_ARR_LEN] = {0};
 int i = 0;
 
 char* saveptr;
@@ -102,7 +105,7 @@ void Task1code(void* parameter)
 	while (1) {
 		
 			
-		strncpy(i2s_localCopy, i2s_string, 1799);
+		strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN);
 
 
 
@@ -118,7 +121,7 @@ void Task1code(void* parameter)
 
 
 		    
-		while(i2s_token != NULL && j < 400)
+		while(i2s_token != NULL && j < INT_ARR_LEN)
 		{
 			i2s_numbers[j] = atoi(i2s_token);
 			j++;
@@ -129,9 +132,9 @@ void Task1code(void* parameter)
 		
 			    
 
-		i2s_write(i2s_num, i2s_numbers, 800, &BytesWritten, portMAX_DELAY);
+		i2s_write(i2s_num, i2s_numbers, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
 		
-		vTaskDelay(pdMS_TO_TICKS(50));
+		vTaskDelay(pdMS_TO_TICKS(90));
 	    
 		//i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
 	}
@@ -277,12 +280,12 @@ void app_main(void) {
 	i2s_set_pin(i2s_num, &pin_config);	
 	
 	
-	for(j = 0; j < 400; j++)
+	for(j = 0; j < INT_ARR_LEN; j++)
 	{
 		i2s_numbers_setup[j] = (j / 20) % 2 == 0 ? 127 : -128;
 	}
 	
-	for(j = 0; j < 400; j++)
+	for(j = 0; j < INT_ARR_LEN; j++)
 	{
 		char temp[8];
 		
@@ -290,7 +293,7 @@ void app_main(void) {
 		
 		strcat(i2s_string, temp);
 		
-		if(j < 399) strcat(i2s_string, "|");
+		if(j < INT_ARR_LEN-1) strcat(i2s_string, "|");
 	}
 	
 	
