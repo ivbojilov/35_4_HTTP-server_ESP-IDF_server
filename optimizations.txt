@@ -5,8 +5,13 @@ V cpu speed 240 MHz
 
 V keepalive
 V tcp timer interval = 50 ms
+V default TCP rto time = 200 ms
 
-pin task to a core explicitly; letting the ESP32 decide is not ideal for real-time
+V max number of retransmissions of data segments = 2
+V max number of retransmissions of SYN segments = 2
+
+V pin task to a core explicitly; letting the ESP32 decide is not ideal for real-time
+
 wi-fi buffer
 tcp buffer
 tcp window size
