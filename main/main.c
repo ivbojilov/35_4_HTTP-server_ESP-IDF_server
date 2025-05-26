@@ -22,11 +22,11 @@
 	#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
-#define CHAR_ARR_LEN 3600
-#define INT_ARR_LEN 800
+#define CHAR_ARR_LEN 4500
+#define INT_ARR_LEN 1000
 
 #define MAX_SIZE 10
-#define COLS 3600
+#define COLS CHAR_ARR_LEN
 
 
 char i2s_string[CHAR_ARR_LEN] = {0};
@@ -160,7 +160,7 @@ void Task1code(void* parameter)
 		if(dequeued == NULL)
 		{
 			i2s_write(i2s_num, silence, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
-			vTaskDelay(pdMS_TO_TICKS(90));
+			vTaskDelay(pdMS_TO_TICKS(1));
 			continue;
 		}
 		
@@ -203,7 +203,7 @@ void Task1code(void* parameter)
 		}
 		//i2s_write(i2s_num, i2s_numbers, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
 		
-		vTaskDelay(pdMS_TO_TICKS(90));
+		vTaskDelay(pdMS_TO_TICKS(1));
 	    
 		//i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
 	}
