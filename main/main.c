@@ -22,8 +22,8 @@
 	#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
-#define CHAR_ARR_LEN 4500
-#define INT_ARR_LEN 1000
+#define CHAR_ARR_LEN 9000
+#define INT_ARR_LEN 2000
 
 #define MAX_SIZE 10
 #define COLS CHAR_ARR_LEN
@@ -71,7 +71,7 @@ char* dequeue()
 {
 	if(isEmpty())
 	{
-		printf("Queue underflow\n");
+		//printf("Queue underflow\n");
 		return NULL;
 	}
 	
@@ -224,7 +224,7 @@ void Task1code(void* parameter)
 // HTTP POST handler
 esp_err_t post_handler(httpd_req_t *req) {
 	
-	ESP_LOGI(TAG, "Start of reception: %lld", esp_timer_get_time()/1000);
+	//ESP_LOGI(TAG, "Start of reception: %lld", esp_timer_get_time()/1000);
     
 	int total_received = 0;
 	int remaining = req->content_len;
@@ -240,7 +240,7 @@ esp_err_t post_handler(httpd_req_t *req) {
 			
 			if(isFull())
 			{
-				printf("Queue overflow\n");
+				//printf("Queue overflow\n");
 				return ESP_FAIL;
 			}
 			

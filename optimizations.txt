@@ -4,6 +4,7 @@ V change POST content type to text/plain
 V cpu speed 240 MHz
 
 V keepalive
+V tcp timer interval = 50 ms
 
 pin task to a core explicitly; letting the ESP32 decide is not ideal for real-time
 wi-fi buffer
