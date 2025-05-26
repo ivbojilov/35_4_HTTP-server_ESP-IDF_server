@@ -1,10 +1,23 @@
 ways to make it faster:
+change POST content type to text/plain
+
+
 pin task to a core explicitly; letting the ESP32 decide is not ideal for real-time
 wi-fi buffer
 tcp buffer
+tcp window size
+tcp receive mail box size
+maximum segment size (MSS)
+
+
+http server internal read buffer
+config.recv_buf_size = 2048;  // <-- add this line
+CONFIG_HTTPD_MAX_REQ_HDR_LEN
+HTTP Server - time in millisecond to wait for posting event
+
 
 enable https - disable
-tcp resending number
+tcp - how many times to resend
 
 check all parameters of all structures;
 wifi_default_config
@@ -15,4 +28,4 @@ keepalive
 cpu speed 240 MHz
 
 
-change POST content type to text/plain
+

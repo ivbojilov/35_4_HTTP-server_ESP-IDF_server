@@ -17,8 +17,8 @@
 #endif
 
 static const char* TAG = "WiFi_AP_Server";
-char content[1600];
-char localCopy[1600];
+char content[1800];
+char localCopy[1800];
 
 int16_t value = 0;
 int8_t numbers[400] = {0};
@@ -48,8 +48,8 @@ esp_err_t post_handler(httpd_req_t *req) {
 	
 	content[total_received] = '\0'; // Null-terminate
 		
-	strncpy(localCopy, content, 1599);
-	localCopy[1599] = '\0';
+	strncpy(localCopy, content, 1799);
+	localCopy[1799] = '\0';
 	
 	
 	ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
