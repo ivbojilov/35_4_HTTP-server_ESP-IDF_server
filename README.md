@@ -8,6 +8,7 @@ ESP-IDF template app
 881ecd0 - client sends 400 uints every 2 seconds; server receives well and prints the full body; clientside 8d6052a  
 5f2eb89 - numbers from -128 to +127; now printing the parsed numbers; clientside ec28725  
 d29f00a - constant audio output on core 1 parallel to string reception; clientside ec28725  
+d8cb77f - constant audio output on core 1; audio is processed in batches; clientside ec28725  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
