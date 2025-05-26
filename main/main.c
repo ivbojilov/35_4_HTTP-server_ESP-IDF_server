@@ -1,4 +1,5 @@
 #include <string.h>
+#include "esp_log_timestamp.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_wifi.h"
@@ -19,6 +20,11 @@
 	#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
+
+
+char i2s_string[1800] = {0};
+int16_t i2s_numbers[400] = {0};
+int j = 0;
 
 
 const uint16_t Volume = 1023;
@@ -87,15 +93,13 @@ char* token;
 void Task1code(void* parameter)
 {
 	while (1) {
-	    if (TimeAtPeakOrTrough == 0) {
-	        OutputValue = (OutputValue == Peak) ? Trough : Peak;
-	        TimeAtPeakOrTrough = WaveLength;
-	    }
+	    
 
-	    TimeAtPeakOrTrough--;
-	    Value16Bit = OutputValue;
-
-	    i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
+		i2s_write(i2s_num, i2s_numbers, 800, &BytesWritten, portMAX_DELAY);
+		
+		vTaskDelay(pdMS_TO_TICKS(25));
+	    
+		//i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
 	}
 	
 	
@@ -230,6 +234,11 @@ void app_main(void) {
 	i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
 	i2s_set_pin(i2s_num, &pin_config);	
 	
+	
+	for(j = 0; j < 400; j++)
+	{
+		i2s_numbers[j] = (j / 20) % 2 == 0 ? 1023 : -1023;
+	}
 	
 	xTaskCreatePinnedToCore(
 	    Task1code,       // Task function
