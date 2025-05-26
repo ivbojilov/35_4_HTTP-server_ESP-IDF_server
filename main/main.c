@@ -8,7 +8,9 @@
 #include "nvs_flash.h"
 #include "esp_http_server.h"
 #include "esp_macros.h"
+#include "esp_timer.h"
 #include "driver/i2s.h"
+
 
 
 
@@ -129,7 +131,7 @@ void Task1code(void* parameter)
 
 		i2s_write(i2s_num, i2s_numbers, 800, &BytesWritten, portMAX_DELAY);
 		
-		vTaskDelay(pdMS_TO_TICKS(25));
+		vTaskDelay(pdMS_TO_TICKS(50));
 	    
 		//i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
 	}
@@ -149,6 +151,8 @@ void Task1code(void* parameter)
 
 // HTTP POST handler
 esp_err_t post_handler(httpd_req_t *req) {
+	
+	ESP_LOGI(TAG, "Start of reception: %lld", esp_timer_get_time()/1000);
     
 	int total_received = 0;
 	int remaining = req->content_len;
@@ -163,10 +167,14 @@ esp_err_t post_handler(httpd_req_t *req) {
 		remaining -= received;
     }
 	
+	//ESP_LOGI(TAG, "String copied to buffer: %lld", esp_timer_get_time()/1000);
+	
 	//strncpy(localCopy, content, 1599);
 	
-	content[total_received] = '\0'; // Null-terminate
-		
+	//content[total_received] = '\0'; // Null-terminate
+	
+	
+	/*	
 	strncpy(localCopy, content, 1799);
 	
 	
@@ -192,7 +200,7 @@ esp_err_t post_handler(httpd_req_t *req) {
 		
 	}
 	
-	
+	*/
 	
 	//ESP_LOGI(TAG, "Received POST data NUMS: %d %d", numbers[0], numbers[1]);
 	/*
@@ -207,6 +215,8 @@ esp_err_t post_handler(httpd_req_t *req) {
 
 	
     httpd_resp_send(req, "OK", HTTPD_RESP_USE_STRLEN);
+	//ESP_LOGI(TAG, "Response sent: %lld", esp_timer_get_time()/1000);
+	
     return ESP_OK;
 }
 

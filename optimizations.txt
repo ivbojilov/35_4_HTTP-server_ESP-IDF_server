@@ -1,6 +1,9 @@
 ways to make it faster:
-change POST content type to text/plain
+V enable https - disable
+V change POST content type to text/plain
+V cpu speed 240 MHz
 
+V keepalive
 
 pin task to a core explicitly; letting the ESP32 decide is not ideal for real-time
 wi-fi buffer
@@ -16,16 +19,16 @@ CONFIG_HTTPD_MAX_REQ_HDR_LEN
 HTTP Server - time in millisecond to wait for posting event
 
 
-enable https - disable
+
 tcp - how many times to resend
 
 check all parameters of all structures;
 wifi_default_config
 http_default_config
 
-keepalive
 
-cpu speed 240 MHz
+
+
 
 don't use strcat() in client; use pointer arithmetic
 
