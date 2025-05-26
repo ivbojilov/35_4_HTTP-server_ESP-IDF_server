@@ -25,12 +25,23 @@
 #define CHAR_ARR_LEN 3600
 #define INT_ARR_LEN 800
 
+#define MAX_SIZE 10
+#define COLS 3600
 
 
 char i2s_string[CHAR_ARR_LEN] = {0};
 char i2s_localCopy[CHAR_ARR_LEN] = {0};
 int16_t i2s_numbers_setup[INT_ARR_LEN] = {0};
 int16_t i2s_numbers[INT_ARR_LEN] = {0};
+static int16_t bufferA[INT_ARR_LEN] = {0};
+static int16_t bufferB[INT_ARR_LEN] = {0};
+static int16_t silence[INT_ARR_LEN] = {0};
+int16_t* activeBuffer = NULL;
+int16_t* currentBuffer = NULL;
+
+volatile int8_t bufferReady = 0;
+volatile int8_t usingBufferA = 1;
+
 int j = 0;
 
 char* i2s_saveptr;
@@ -88,8 +99,8 @@ static const char* TAG = "WiFi_AP_Server";
 
 TaskHandle_t Task1;
 
-char content[CHAR_ARR_LEN];
-char localCopy[CHAR_ARR_LEN];
+char content[CHAR_ARR_LEN] = {0};
+char localCopy[CHAR_ARR_LEN] = {0};
 
 int16_t value = 0;
 int8_t numbers[INT_ARR_LEN] = {0};
@@ -105,7 +116,7 @@ void Task1code(void* parameter)
 	while (1) {
 		
 			
-		strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN);
+		strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN-1);
 
 
 
@@ -118,21 +129,30 @@ void Task1code(void* parameter)
 		i2s_token = strtok_r(i2s_localCopy, "|", &i2s_saveptr);
 
 		
-
+		activeBuffer = usingBufferA ? bufferA : bufferB;
 
 		    
 		while(i2s_token != NULL && j < INT_ARR_LEN)
 		{
-			i2s_numbers[j] = atoi(i2s_token);
+			activeBuffer[j] = atoi(i2s_token);
+			//i2s_numbers[j] = atoi(i2s_token);
 			j++;
 			
 			i2s_token = strtok_r(NULL, "|", &i2s_saveptr);
 		}
-
 		
-			    
+		usingBufferA = !usingBufferA;
+		
 
-		i2s_write(i2s_num, i2s_numbers, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
+		currentBuffer = usingBufferA ? bufferA : bufferB;
+		
+		if(currentBuffer != NULL)
+		{			    
+			i2s_write(i2s_num, currentBuffer, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
+		} else {
+			i2s_write(i2s_num, silence, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
+		}
+		//i2s_write(i2s_num, i2s_numbers, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
 		
 		vTaskDelay(pdMS_TO_TICKS(90));
 	    
@@ -160,6 +180,7 @@ esp_err_t post_handler(httpd_req_t *req) {
 	int total_received = 0;
 	int remaining = req->content_len;
 	
+	//ESP_LOGI(TAG, "Size = %d", remaining);
 	
 	while(remaining > 0)
 	{
@@ -170,6 +191,8 @@ esp_err_t post_handler(httpd_req_t *req) {
 		remaining -= received;
     }
 	
+	
+	//ESP_LOGI(TAG, "Char: %c", content[3598]);
 	//ESP_LOGI(TAG, "String copied to buffer: %lld", esp_timer_get_time()/1000);
 	
 	//strncpy(localCopy, content, 1599);
