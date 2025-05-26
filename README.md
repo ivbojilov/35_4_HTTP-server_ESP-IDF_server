@@ -5,7 +5,8 @@ ESP-IDF template app
 869cb44 - sending the int '10'; the client sends it as a string, the server parses the string to int; corresponds to clientside 67533f4  
 9172980 - client converts an int to string and then sends it; corresponds to clientside 88be0d2  
 3312f34 - sending 2 numbers; using int arrays in client and server; client creates a string from 2 ints, server parses the 2 numbers back into ints; corresponds to clientside f6b33d7  
-881ecd0 - client sends 400 uints every 2 seconds; server receives well and prints the full body; clientside 8d6052a    
+881ecd0 - client sends 400 uints every 2 seconds; server receives well and prints the full body; clientside 8d6052a  
+5f2eb89 - numbers from -128 to +127; now printing the parsed numbers; clientside ec28725  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
