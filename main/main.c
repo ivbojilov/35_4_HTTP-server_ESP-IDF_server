@@ -7,6 +7,9 @@
 #include "nvs_flash.h"
 #include "esp_http_server.h"
 #include "esp_macros.h"
+#include "driver/i2s.h"
+
+
 
 #define WIFI_SSID "ESP32_SERVER"
 #define WIFI_PASS ""
@@ -16,7 +19,59 @@
 	#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
+
+
+const uint16_t Volume = 1023;
+const int16_t Peak = Volume;
+const int16_t Trough = -Volume;
+int16_t OutputValue = Peak;
+const uint16_t WaveLength = 20;
+uint16_t TimeAtPeakOrTrough = WaveLength;
+
+size_t BytesWritten;
+int16_t Value16Bit;
+
+
+
+static const i2s_port_t i2s_num = I2S_NUM_0;
+
+static const i2s_config_t i2s_config = {
+    .mode = I2S_MODE_MASTER | I2S_MODE_TX,
+    .sample_rate = 8000,
+    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
+    .communication_format = I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB,
+    .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
+    .dma_buf_count = 8,
+    .dma_buf_len = 1024,
+    .use_apll = false,
+    .tx_desc_auto_clear = true,
+    .fixed_mclk = -1
+};
+
+static const i2s_pin_config_t pin_config = {
+    .bck_io_num = 27,
+    .ws_io_num = 26,
+    .data_out_num = 25,
+    .data_in_num = I2S_PIN_NO_CHANGE
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 static const char* TAG = "WiFi_AP_Server";
+
+TaskHandle_t Task1;
+
 char content[1800];
 char localCopy[1800];
 
@@ -26,6 +81,34 @@ int i = 0;
 
 char* saveptr;
 char* token;
+
+
+
+void Task1code(void* parameter)
+{
+	while (1) {
+	    if (TimeAtPeakOrTrough == 0) {
+	        OutputValue = (OutputValue == Peak) ? Trough : Peak;
+	        TimeAtPeakOrTrough = WaveLength;
+	    }
+
+	    TimeAtPeakOrTrough--;
+	    Value16Bit = OutputValue;
+
+	    i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
 
 
 // HTTP POST handler
@@ -76,11 +159,13 @@ esp_err_t post_handler(httpd_req_t *req) {
 	
 	
 	//ESP_LOGI(TAG, "Received POST data NUMS: %d %d", numbers[0], numbers[1]);
+	/*
 	i = 0;
 	for(i = 0; i < 400; i++)
 	{
 		ESP_LOGI(TAG, "%d. %d", i, numbers[i]);
 	}
+	*/
 	
 	
 
@@ -138,6 +223,25 @@ void wifi_init_softap(void)
 
 void app_main(void) {
     ESP_ERROR_CHECK(nvs_flash_init());
+	
+
+	
+	// Install and start I2S driver
+	i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
+	i2s_set_pin(i2s_num, &pin_config);	
+	
+	
+	xTaskCreatePinnedToCore(
+	    Task1code,       // Task function
+	    "Task1",         // Name
+	    2048,            // Stack size in words (adjust if needed)
+	    NULL,            // Parameter
+	    1,               // Priority
+	    &Task1,          // Handle
+	    1                // Core 0 (PRO_CPU)
+	);		
+	
+	
     wifi_init_softap();
     start_webserver();
 }
