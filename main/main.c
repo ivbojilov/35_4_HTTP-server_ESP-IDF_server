@@ -17,8 +17,11 @@
 #endif
 
 static const char* TAG = "WiFi_AP_Server";
+char content[1600];
+char localCopy[1600];
+
 int16_t value = 0;
-int8_t numbers[2] = {0};
+int8_t numbers[400] = {0};
 int i = 0;
 
 char* saveptr;
@@ -27,24 +30,34 @@ char* token;
 
 // HTTP POST handler
 esp_err_t post_handler(httpd_req_t *req) {
-    char content[100];
-	char localCopy[100];
-	
-    int ret = httpd_req_recv(req, content, MIN(req->content_len, sizeof(content) - 1));
-    if (ret <= 0) return ESP_FAIL;
-
     
+	int total_received = 0;
+	int remaining = req->content_len;
 	
-	strncpy(localCopy, content, 7);
 	
-	content[ret] = '\0'; // Null-terminate
+	while(remaining > 0)
+	{
+    	int received = httpd_req_recv(req, content + total_received, remaining);
+	    if (received <= 0) return ESP_FAIL;
 		
+		total_received += received;
+		remaining -= received;
+    }
+	
+	//strncpy(localCopy, content, 1599);
+	
+	content[total_received] = '\0'; // Null-terminate
+		
+	strncpy(localCopy, content, 1599);
+	localCopy[1599] = '\0';
+	
+	
 	ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
 	
 	i = 0;
 	
 	
-	
+	/*
 	token = strtok_r(localCopy, "|", &saveptr);
 	
 	
@@ -60,11 +73,11 @@ esp_err_t post_handler(httpd_req_t *req) {
 		
 	}
 	
+	*/
+	
+	//ESP_LOGI(TAG, "Received POST data NUMS: %d %d", numbers[0], numbers[1]);
 	
 	
-	ESP_LOGI(TAG, "Received POST data NUMS: %d %d", numbers[0], numbers[1]);
-	
-	//ESP_LOGI(TAG, "Received POST data: %d", value);
 
 	
     httpd_resp_send(req, "OK", HTTPD_RESP_USE_STRLEN);
