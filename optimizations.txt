@@ -27,5 +27,17 @@ keepalive
 
 cpu speed 240 MHz
 
+don't use strcat() in client; use pointer arithmetic
+
+
+I (585) wifi_init: rx ba win: 6
+I (585) wifi_init: accept mbox: 6
+I (595) wifi_init: tcpip mbox: 32
+I (595) wifi_init: udp mbox: 6
+I (595) wifi_init: tcp mbox: 6
+I (595) wifi_init: tcp tx win: 5760
+I (605) wifi_init: tcp rx win: 5760
+I (605) wifi_init: tcp mss: 1440
+
 
 

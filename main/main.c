@@ -49,22 +49,22 @@ esp_err_t post_handler(httpd_req_t *req) {
 	content[total_received] = '\0'; // Null-terminate
 		
 	strncpy(localCopy, content, 1799);
-	localCopy[1799] = '\0';
 	
 	
-	ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
+	
+	//ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
 	
 	i = 0;
 	
 	
-	/*
+	
 	token = strtok_r(localCopy, "|", &saveptr);
 	
-	
+	localCopy[1799] = '\0';
 	
 	
 	    
-	while(token != NULL && i < 2)
+	while(token != NULL && i < 400)
 	{
 		numbers[i] = atoi(token);
 		i++;
@@ -73,9 +73,14 @@ esp_err_t post_handler(httpd_req_t *req) {
 		
 	}
 	
-	*/
+	
 	
 	//ESP_LOGI(TAG, "Received POST data NUMS: %d %d", numbers[0], numbers[1]);
+	i = 0;
+	for(i = 0; i < 400; i++)
+	{
+		ESP_LOGI(TAG, "%d. %d", i, numbers[i]);
+	}
 	
 	
 

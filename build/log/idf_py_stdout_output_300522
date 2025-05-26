@@ -1,0 +1,76 @@
+[1/5] cd /home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build/esp-idf/esptool_py && /home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python /home/ibojilov/Documents/esp-idf-v5.4.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build/partition_table/partition-table.bin /home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build/app-template.bin
+app-template.bin binary size 0xc1520 bytes. Smallest app partition is 0x100000 bytes. 0x3eae0 bytes (24%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] cd /home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build/bootloader/esp-idf/esptool_py && /home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python /home/ibojilov/Documents/esp-idf-v5.4.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build/bootloader/bootloader.bin
+Bootloader binary size 0x6580 bytes. 0xa80 bytes (9%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] cd /home/ibojilov/Documents/esp-idf-v5.4.1/components/esptool_py && /home/ibojilov/.espressif/tools/cmake/3.30.2/bin/cmake -D IDF_PATH=/home/ibojilov/Documents/esp-idf-v5.4.1 -D "SERIAL_TOOL=/home/ibojilov/.espressif/python_env/idf5.4_py3.10_env/bin/python;;/home/ibojilov/Documents/esp-idf-v5.4.1/components/esptool_py/esptool/esptool.py;--chip;esp32" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/home/ibojilov/workspace/35_4_HTTP-server_ESP-IDF_server/build -P /home/ibojilov/Documents/esp-idf-v5.4.1/components/esptool_py/run_serial_tool.cmake
+esptool.py --chip esp32 -p /dev/ttyUSB0 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 4MB 0x1000 bootloader/bootloader.bin 0x10000 app-template.bin 0x8000 partition_table/partition-table.bin 0xd000 ota_data_initial.bin
+esptool.py v4.8.1
+Serial port /dev/ttyUSB0
+Connecting....
+Chip is ESP32-D0WD-V3 (revision v3.1)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: 08:a6:f7:b1:df:e0
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000d1fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Flash will be erased from 0x0000d000 to 0x0000efff...
+SHA digest in image updated
+Compressed 25984 bytes to 16381...
+Writing at 0x00001000... (100 %)
+Wrote 25984 bytes (16381 compressed) at 0x00001000 in 0.6 seconds (effective 342.9 kbit/s)...
+Hash of data verified.
+Compressed 791840 bytes to 499656...
+Writing at 0x00010000... (3 %)
+Writing at 0x0001c66a... (6 %)
+Writing at 0x00025385... (9 %)
+Writing at 0x00030490... (12 %)
+Writing at 0x00035d24... (16 %)
+Writing at 0x0003bc57... (19 %)
+Writing at 0x000418d9... (22 %)
+Writing at 0x000478bb... (25 %)
+Writing at 0x0004d3d8... (29 %)
+Writing at 0x0005332e... (32 %)
+Writing at 0x00058578... (35 %)
+Writing at 0x0005db30... (38 %)
+Writing at 0x000633ce... (41 %)
+Writing at 0x000687c5... (45 %)
+Writing at 0x0006db42... (48 %)
+Writing at 0x000732f6... (51 %)
+Writing at 0x0007922a... (54 %)
+Writing at 0x0007eb60... (58 %)
+Writing at 0x000847ab... (61 %)
+Writing at 0x0008a55d... (64 %)
+Writing at 0x0008fccf... (67 %)
+Writing at 0x00095a4f... (70 %)
+Writing at 0x0009bac0... (74 %)
+Writing at 0x000a1743... (77 %)
+Writing at 0x000a710b... (80 %)
+Writing at 0x000b14cd... (83 %)
+Writing at 0x000b7632... (87 %)
+Writing at 0x000bd600... (90 %)
+Writing at 0x000c325c... (93 %)
+Writing at 0x000c9534... (96 %)
+Writing at 0x000ce771... (100 %)
+Wrote 791840 bytes (499656 compressed) at 0x00010000 in 12.6 seconds (effective 503.2 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 138...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (138 compressed) at 0x00008000 in 0.0 seconds (effective 900.1 kbit/s)...
+Hash of data verified.
+Compressed 8192 bytes to 31...
+Writing at 0x0000d000... (100 %)
+Wrote 8192 bytes (31 compressed) at 0x0000d000 in 0.1 seconds (effective 1092.7 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
