@@ -9,6 +9,7 @@ ESP-IDF template app
 5f2eb89 - numbers from -128 to +127; now printing the parsed numbers; clientside ec28725  
 d29f00a - constant audio output on core 1 parallel to string reception; clientside ec28725  
 d8cb77f - constant audio output on core 1; audio is processed in batches; clientside ec28725  
+0c4b5c2 - parsing happens before each i2s_write(); clientside ec28725  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
