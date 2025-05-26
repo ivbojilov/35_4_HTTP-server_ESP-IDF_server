@@ -7,6 +7,7 @@ ESP-IDF template app
 3312f34 - sending 2 numbers; using int arrays in client and server; client creates a string from 2 ints, server parses the 2 numbers back into ints; corresponds to clientside f6b33d7  
 881ecd0 - client sends 400 uints every 2 seconds; server receives well and prints the full body; clientside 8d6052a  
 5f2eb89 - numbers from -128 to +127; now printing the parsed numbers; clientside ec28725  
+d29f00a - constant audio output on core 1 parallel to string reception; clientside ec28725  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
