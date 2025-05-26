@@ -23,8 +23,13 @@
 
 
 char i2s_string[1800] = {0};
+char i2s_localCopy[1800] = {0};
+int16_t i2s_numbers_setup[400] = {0};
 int16_t i2s_numbers[400] = {0};
 int j = 0;
+
+char* i2s_saveptr;
+char* i2s_token;
 
 
 const uint16_t Volume = 1023;
@@ -93,7 +98,34 @@ char* token;
 void Task1code(void* parameter)
 {
 	while (1) {
-	    
+		
+			
+		strncpy(i2s_localCopy, i2s_string, 1799);
+
+
+
+		//ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
+
+		j = 0;
+
+
+
+		i2s_token = strtok_r(i2s_localCopy, "|", &i2s_saveptr);
+
+		
+
+
+		    
+		while(i2s_token != NULL && j < 400)
+		{
+			i2s_numbers[j] = atoi(i2s_token);
+			j++;
+			
+			i2s_token = strtok_r(NULL, "|", &i2s_saveptr);
+		}
+
+		
+			    
 
 		i2s_write(i2s_num, i2s_numbers, 800, &BytesWritten, portMAX_DELAY);
 		
@@ -237,8 +269,24 @@ void app_main(void) {
 	
 	for(j = 0; j < 400; j++)
 	{
-		i2s_numbers[j] = (j / 20) % 2 == 0 ? 1023 : -1023;
+		i2s_numbers_setup[j] = (j / 20) % 2 == 0 ? 127 : -128;
 	}
+	
+	for(j = 0; j < 400; j++)
+	{
+		char temp[8];
+		
+		snprintf(temp, 8, "%d", i2s_numbers_setup[j]);
+		
+		strcat(i2s_string, temp);
+		
+		if(j < 399) strcat(i2s_string, "|");
+	}
+	
+	
+	ESP_LOGI(TAG, "i2s_string = %s", i2s_string);	
+	
+	
 	
 	xTaskCreatePinnedToCore(
 	    Task1code,       // Task function
