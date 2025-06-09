@@ -203,8 +203,8 @@ void Task1code(void* parameter)
 		
 		//ESP_LOGI(TAG, "END   Parsing into 16int_t: %lld", esp_timer_get_time()/1000);
 		
-		startTime = esp_timer_get_time()/1000;
-		ESP_LOGI(TAG, "START Writing to I2S buffer: %lu", startTime);
+		//startTime = esp_timer_get_time()/1000;
+		//ESP_LOGI(TAG, "START Writing to I2S buffer: %lu", startTime);
 				
 		usingBufferA = !usingBufferA;
 		
@@ -219,9 +219,9 @@ void Task1code(void* parameter)
 		}
 		//i2s_write(i2s_num, i2s_numbers, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
 		
-		ESP_LOGI(TAG, "END   Writing to I2S buffer: %lld; diff = %lld", esp_timer_get_time()/1000, esp_timer_get_time()/1000-startTime);
+		//ESP_LOGI(TAG, "END   Writing to I2S buffer: %lld; diff = %lld", esp_timer_get_time()/1000, esp_timer_get_time()/1000-startTime);
 		
-		vTaskDelay(pdMS_TO_TICKS(200));
+		vTaskDelay(pdMS_TO_TICKS(250));
 	    
 		//i2s_write(i2s_num, &Value16Bit, sizeof(Value16Bit), &BytesWritten, portMAX_DELAY);
 	}

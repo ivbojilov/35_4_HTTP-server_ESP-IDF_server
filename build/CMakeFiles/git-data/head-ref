@@ -1,1 +1,33 @@
-933111fca17784f71d91b7641aa531b92ba5615f
+0000000000000000000000000000000000000000 54cb76b01aa7b97a704a8039c4bb6d96debb1386 fifinel <jbojilov@gmail.com> 1748000036 +0300	commit (initial): first
+54cb76b01aa7b97a704a8039c4bb6d96debb1386 421b611d87a57ec7378d18db479fb5d07b64c1a8 fifinel <jbojilov@gmail.com> 1748000551 +0300	pull origin: Fast-forward
+421b611d87a57ec7378d18db479fb5d07b64c1a8 9eb9378278f0d248f3e6d43bacf4c4e0951c7fbe fifinel <jbojilov@gmail.com> 1748023802 +0300	pull origin: Fast-forward
+9eb9378278f0d248f3e6d43bacf4c4e0951c7fbe 869cb447a1392b19758a3ab2bf86d0ecbd2c9c7c fifinel <jbojilov@gmail.com> 1748182725 +0300	commit: sending the int '10'; the client sends it as a string, the server parses the string to int
+869cb447a1392b19758a3ab2bf86d0ecbd2c9c7c 1fcf56fce678c64f1b431a0e40c79a250494945d fifinel <jbojilov@gmail.com> 1748183164 +0300	pull origin: Fast-forward
+1fcf56fce678c64f1b431a0e40c79a250494945d 27be0266d3ad25ec3754de724d709b962acfc8f0 fifinel <jbojilov@gmail.com> 1748183393 +0300	pull origin: Fast-forward
+27be0266d3ad25ec3754de724d709b962acfc8f0 9172980c484e70d052979808f32f368503083466 fifinel <jbojilov@gmail.com> 1748194482 +0300	commit: client converts an int to string and then sends it
+9172980c484e70d052979808f32f368503083466 0ba18e8ccc299c69661d998837a3f94bed1f874b fifinel <jbojilov@gmail.com> 1748194792 +0300	pull origin: Fast-forward
+0ba18e8ccc299c69661d998837a3f94bed1f874b 3312f34c72abed6033cbb0a2ee189bfe7a3da5f2 fifinel <jbojilov@gmail.com> 1748253266 +0300	commit: sending 2 numbers; using int arrays in client and server; client creates a string from 2 ints, server parses the 2 numbers back into ints
+3312f34c72abed6033cbb0a2ee189bfe7a3da5f2 cc4a30e7952aafad712ab12aae97caa1afeb0691 fifinel <jbojilov@gmail.com> 1748254820 +0300	pull origin: Fast-forward
+cc4a30e7952aafad712ab12aae97caa1afeb0691 881ecd0fedf55b21335be1e99db77d4e13038a82 fifinel <jbojilov@gmail.com> 1748260532 +0300	commit: client sends 400 uints every 2 seconds; server receives well and prints the full body
+881ecd0fedf55b21335be1e99db77d4e13038a82 26b5e0af54034806a982ed5088c90be9f31aebe2 fifinel <jbojilov@gmail.com> 1748260786 +0300	pull origin: Fast-forward
+26b5e0af54034806a982ed5088c90be9f31aebe2 52f8d21ea512700e48a1933bdd09ad9540f5e15a fifinel <jbojilov@gmail.com> 1748266784 +0300	commit: numbers from -128 to +127
+52f8d21ea512700e48a1933bdd09ad9540f5e15a 5f2eb8929cbbcbd8cc9e7c8675f9e69f5af04f08 fifinel <jbojilov@gmail.com> 1748267977 +0300	commit: nummbers from -128 to +127; now printing the parsed numbers
+5f2eb8929cbbcbd8cc9e7c8675f9e69f5af04f08 1bdb7e50093145264779ffedef9a1ed43a6383a3 fifinel <jbojilov@gmail.com> 1748271331 +0300	commit: constant audio output on core 1 parallel to string reception
+1bdb7e50093145264779ffedef9a1ed43a6383a3 c4526e7c7702f898d53158fac02b98d3a36eafcd fifinel <jbojilov@gmail.com> 1748271395 +0300	reset: moving to origin/master
+c4526e7c7702f898d53158fac02b98d3a36eafcd d29f00ab29f4e8329a8893afddc3f04299180fae fifinel <jbojilov@gmail.com> 1748271432 +0300	commit: constant audio output on core 1 parallel to string reception
+d29f00ab29f4e8329a8893afddc3f04299180fae c0fc322c36fc59fdede808d723ec4095fcb2f480 fifinel <jbojilov@gmail.com> 1748271784 +0300	pull origin: Fast-forward
+c0fc322c36fc59fdede808d723ec4095fcb2f480 d8cb77fff1ec28d58adf0195a18340e837a16d04 fifinel <jbojilov@gmail.com> 1748274214 +0300	commit: constant audio output on core 1; audio is processed in batches
+d8cb77fff1ec28d58adf0195a18340e837a16d04 7d2b6333d9bb33b69cb320a37369eb35b918d32f fifinel <jbojilov@gmail.com> 1748274448 +0300	pull origin: Fast-forward
+7d2b6333d9bb33b69cb320a37369eb35b918d32f 0c4b5c27f14919424104c4ade102b84952c16f21 fifinel <jbojilov@gmail.com> 1748277545 +0300	commit: parsing happens before each i2s_write()
+0c4b5c27f14919424104c4ade102b84952c16f21 f93ffe121e96842955a3a7c88fc079a0a106e7c4 fifinel <jbojilov@gmail.com> 1748277689 +0300	pull origin: Fast-forward
+f93ffe121e96842955a3a7c88fc079a0a106e7c4 ea447e683214286871ba55db36e478cb044b8c82 fifinel <jbojilov@gmail.com> 1748286089 +0300	commit: diabled HTTPS; content type = text/plain; 240 MHz; keepalive; no change, still 250 ms
+ea447e683214286871ba55db36e478cb044b8c82 6f37ce7d26731b6e60534dbaf8454fe2d56e7cd7 fifinel <jbojilov@gmail.com> 1748291443 +0300	commit: sending 800 ints; surprisingly, still 250 ms
+6f37ce7d26731b6e60534dbaf8454fe2d56e7cd7 f767f1a29ec0037bfe3b0acddf0b6c7023b39481 fifinel <jbojilov@gmail.com> 1748293784 +0300	commit: added alternating buffers
+f767f1a29ec0037bfe3b0acddf0b6c7023b39481 6e89cd50ebd6b2f92aef39042621cee9c83dbfda fifinel <jbojilov@gmail.com> 1748295716 +0300	commit: queue implemented; but not enough data so sound is irregular
+6e89cd50ebd6b2f92aef39042621cee9c83dbfda 576f4ccf5bc9a78e6189084e76fb0098d7fd8f3d fifinel <jbojilov@gmail.com> 1748296905 +0300	commit: sending 4499 chars working?
+576f4ccf5bc9a78e6189084e76fb0098d7fd8f3d e862fef067879ce74977fb11c606b1f3ebfb4ac1 fifinel <jbojilov@gmail.com> 1748298144 +0300	commit: 8999 chars, sends them in 500 ms, some sound; TCP timer interval = 50 ms
+e862fef067879ce74977fb11c606b1f3ebfb4ac1 db4bcd9b5e1156f9578d61cf1f6dafdd7d20890d fifinel <jbojilov@gmail.com> 1748300590 +0300	commit: audio works correctly for 5 mins, did not stop
+db4bcd9b5e1156f9578d61cf1f6dafdd7d20890d e81f3185be6eaf6be9f0bab90e91dcc5efa05e38 fifinel <jbojilov@gmail.com> 1749465487 +0300	commit: added logging for time for dequeuing
+e81f3185be6eaf6be9f0bab90e91dcc5efa05e38 d0bd14776bd1e300fd21e524cff67f1f3ee120b6 fifinel <jbojilov@gmail.com> 1749466826 +0300	commit: added logging for the time it takes to copy the dequeued frame into the local buffer
+d0bd14776bd1e300fd21e524cff67f1f3ee120b6 933111fca17784f71d91b7641aa531b92ba5615f fifinel <jbojilov@gmail.com> 1749468611 +0300	commit: added logging for parsing
+933111fca17784f71d91b7641aa531b92ba5615f c764c83ce557a182bfc2fec0f59c1d515da8525b fifinel <jbojilov@gmail.com> 1749470787 +0300	commit: added logs for how much time writing to the i2s output buffer takes
