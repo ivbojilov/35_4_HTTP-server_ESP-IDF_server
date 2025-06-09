@@ -170,18 +170,18 @@ void Task1code(void* parameter)
 			continue;
 		}
 		
-		ESP_LOGI(TAG, "START Copy dequeued frame into a local copy: %lld", esp_timer_get_time()/1000);
+		//ESP_LOGI(TAG, "START Copy dequeued frame into a local copy: %lld", esp_timer_get_time()/1000);
 		
 		strncpy(i2s_localCopy, dequeued, CHAR_ARR_LEN-1);	
 		//strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN-1);
 
-		ESP_LOGI(TAG, "END   Copy dequeued frame into a local copy: %lld", esp_timer_get_time()/1000);
+		//ESP_LOGI(TAG, "END   Copy dequeued frame into a local copy: %lld", esp_timer_get_time()/1000);
 
 		//ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
 
 		j = 0;
 
-
+		//ESP_LOGI(TAG, "START Parsing into 16int_t: %lld", esp_timer_get_time()/1000);
 
 		i2s_token = strtok_r(i2s_localCopy, "|", &i2s_saveptr);
 
@@ -198,6 +198,8 @@ void Task1code(void* parameter)
 			i2s_token = strtok_r(NULL, "|", &i2s_saveptr);
 		}
 		
+		//ESP_LOGI(TAG, "END   Parsing into 16int_t: %lld", esp_timer_get_time()/1000);
+				
 		usingBufferA = !usingBufferA;
 		
 
