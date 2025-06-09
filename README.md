@@ -11,6 +11,7 @@ d29f00a - constant audio output on core 1 parallel to string reception; clientsi
 d8cb77f - constant audio output on core 1; audio is processed in batches; clientside ec28725  
 0c4b5c2 - parsing happens before each i2s_write(); clientside ec28725  
 db4bcd9 - audio works correctly for 5 mins, did not stop; between this and 0c4b5c2 commits are valuable; clientside 877e6e4  
+91f5be3 - increased stack to 4096; dropoffs from time to time because of timing; no stack overflow for 1000 s; clientside 0929618  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
