@@ -59,6 +59,8 @@ int8_t first = 1;
 
 int16_t diff = 0;
 unsigned long startTime = 0;
+UBaseType_t highWaterMark;
+
 
 int isFull()
 {
@@ -176,8 +178,8 @@ void Task1code(void* parameter)
 			vTaskDelay(pdMS_TO_TICKS(5000));
 		}
 		*/
-		
-		ESP_LOGI(TAG, "Queue slots available: %d", availableSlots());
+		highWaterMark = uxTaskGetStackHighWaterMark(NULL);
+		ESP_LOGI(TAG, "Queue slots available: %d; Min stack: %u bytes", availableSlots(), highWaterMark * 4);
 		//ESP_LOGI(TAG, "Start of dequeuing: %lld", esp_timer_get_time()/1000);		
 		
 		dequeued = dequeue();
@@ -435,7 +437,7 @@ void app_main(void) {
 	xTaskCreatePinnedToCore(
 	    Task1code,       // Task function
 	    "Task1",         // Name
-	    2048,            // Stack size in words (adjust if needed)
+	    4096,            // Stack size in words (adjust if needed)
 	    NULL,            // Parameter
 	    1,               // Priority
 	    &Task1,          // Handle
