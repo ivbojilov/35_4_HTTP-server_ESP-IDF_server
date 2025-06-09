@@ -92,6 +92,23 @@ char* dequeue()
 }
 
 
+int availableSlots()
+{
+	if(front == -1 && rear == -1)
+	{
+		return MAX_SIZE;
+	}
+	
+	if(rear >= front)
+	{
+		return MAX_SIZE - (rear - front + 1);
+	} else {
+		return front - rear - 1;
+	}
+	
+}
+
+
 
 
 
@@ -160,6 +177,7 @@ void Task1code(void* parameter)
 		}
 		*/
 		
+		ESP_LOGI(TAG, "Queue slots available: %d", availableSlots());
 		//ESP_LOGI(TAG, "Start of dequeuing: %lld", esp_timer_get_time()/1000);		
 		
 		dequeued = dequeue();
