@@ -156,7 +156,13 @@ void Task1code(void* parameter)
 			vTaskDelay(pdMS_TO_TICKS(5000));
 		}
 		*/
+		
+		ESP_LOGI(TAG, "Start of dequeuing: %lld", esp_timer_get_time()/1000);		
+		
 		dequeued = dequeue();
+		
+		ESP_LOGI(TAG, "End of dequeuing: %lld", esp_timer_get_time()/1000);		
+		
 		if(dequeued == NULL)
 		{
 			i2s_write(i2s_num, silence, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
