@@ -157,11 +157,11 @@ void Task1code(void* parameter)
 		}
 		*/
 		
-		ESP_LOGI(TAG, "Start of dequeuing: %lld", esp_timer_get_time()/1000);		
+		//ESP_LOGI(TAG, "Start of dequeuing: %lld", esp_timer_get_time()/1000);		
 		
 		dequeued = dequeue();
 		
-		ESP_LOGI(TAG, "End of dequeuing: %lld", esp_timer_get_time()/1000);		
+		//ESP_LOGI(TAG, "End of dequeuing: %lld", esp_timer_get_time()/1000);		
 		
 		if(dequeued == NULL)
 		{
@@ -170,10 +170,12 @@ void Task1code(void* parameter)
 			continue;
 		}
 		
+		ESP_LOGI(TAG, "START Copy dequeued frame into a local copy: %lld", esp_timer_get_time()/1000);
+		
 		strncpy(i2s_localCopy, dequeued, CHAR_ARR_LEN-1);	
 		//strncpy(i2s_localCopy, i2s_string, CHAR_ARR_LEN-1);
 
-
+		ESP_LOGI(TAG, "END   Copy dequeued frame into a local copy: %lld", esp_timer_get_time()/1000);
 
 		//ESP_LOGI(TAG, "Received POST data TEXT: %s", localCopy);
 
