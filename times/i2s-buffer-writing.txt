@@ -1,0 +1,19 @@
+P_Server: END   Writing to I2S buffer: 45614
+I (46311) WiFi_AP_Server: START Writing to I2S buffer: 45811
+I (46371) WiFi_AP_Server: END   Writing to I2S buffer: 45870
+I (46571) WiFi_AP_Server: START Writing to I2S buffer: 46071
+I (46621) WiFi_AP_Server: END   Writing to I2S buffer: 46126
+I (46831) WiFi_AP_Server: START Writing to I2S buffer: 46331
+I (46881) WiFi_AP_Server: END   Writing to I2S buffer: 46382
+I (47081) WiFi_AP_Server: START Writing to I2S buffer: 46581
+I (47141) WiFi_AP_Server: END   Writing to I2S buffer: 46638
+I (47341) WiFi_AP_Server: START Writing to I2S buffer: 46841
+I (47391) WiFi_AP_Server: END   Writing to I2S buffer: 46894
+I (47591) WiFi_AP_Server: START Writing to I2S buffer: 47091
+I (47651) WiFi_AP_Server: END   Writing to I2S buffer: 47150
+I (47851) WiFi_AP_Server: START Writing to I2S buffer: 47351
+I (47901) WiFi_AP_Server: END   Writing to I2S buffer: 47406
+I (48111) WiFi_AP_Server: START Writing to I2S buffer: 47611
+I (48161) WiFi_AP_Server: END   Writing to I2S buffer: 47662
+I (48361) WiFi_AP_Server: START Writing to I2S buffer: 47861
+I (48421) WiFi_AP_Server: END   Writing to I2S buffer: 47918

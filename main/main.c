@@ -57,6 +57,9 @@ int8_t rear = -1;
 int8_t _index = 0;
 int8_t first = 1;
 
+int16_t diff = 0;
+unsigned long startTime = 0;
+
 int isFull()
 {
 	return (rear + 1) % MAX_SIZE == front;
@@ -199,6 +202,9 @@ void Task1code(void* parameter)
 		}
 		
 		//ESP_LOGI(TAG, "END   Parsing into 16int_t: %lld", esp_timer_get_time()/1000);
+		
+		startTime = esp_timer_get_time()/1000;
+		ESP_LOGI(TAG, "START Writing to I2S buffer: %lu", startTime);
 				
 		usingBufferA = !usingBufferA;
 		
@@ -212,6 +218,8 @@ void Task1code(void* parameter)
 			i2s_write(i2s_num, silence, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
 		}
 		//i2s_write(i2s_num, i2s_numbers, INT_ARR_LEN*2, &BytesWritten, portMAX_DELAY);
+		
+		ESP_LOGI(TAG, "END   Writing to I2S buffer: %lld; diff = %lld", esp_timer_get_time()/1000, esp_timer_get_time()/1000-startTime);
 		
 		vTaskDelay(pdMS_TO_TICKS(200));
 	    

@@ -50,3 +50,23 @@ I (605) wifi_init: tcp mss: 1440
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+how many slots are occupied in the ring queue at any given time?
+how much heap is free at any given time?
+
+
+
+
+
