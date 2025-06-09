@@ -10,6 +10,7 @@ ESP-IDF template app
 d29f00a - constant audio output on core 1 parallel to string reception; clientside ec28725  
 d8cb77f - constant audio output on core 1; audio is processed in batches; clientside ec28725  
 0c4b5c2 - parsing happens before each i2s_write(); clientside ec28725  
+db4bcd9 - audio works correctly for 5 mins, did not stop; between this and 0c4b5c2 commits are valuable; clientside 877e6e4  
 &nbsp;  -  
 &nbsp;  -  
 &nbsp;  -  
